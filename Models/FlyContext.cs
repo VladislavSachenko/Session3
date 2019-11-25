@@ -19,8 +19,7 @@ namespace Session3.Models
         public DbSet<User> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies()
-                .UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=Q:\Projects\C#\Session3\Session3.mdf;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=Q:\Projects\C#\Session3\Session3.mdf;Integrated Security=True");
         }
     }
 }

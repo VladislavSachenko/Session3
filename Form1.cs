@@ -16,6 +16,7 @@ namespace Session3
         public Form1()
         {
             InitializeComponent();
+            EFTutor();
         }
 
         FlyContext db = new Models.FlyContext();
