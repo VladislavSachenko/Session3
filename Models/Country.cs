@@ -10,5 +10,7 @@ namespace Session3.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public List<Airport> Airports { get; set; }
+        public List<Route> Routes { get; set; }
     }
 }

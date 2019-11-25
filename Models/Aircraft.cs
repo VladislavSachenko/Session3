@@ -14,6 +14,7 @@ namespace Session3.Models
         public int TotalSeats { get; set; }
         public int EconomySeats { get; set; }
         public int BusinessSeats { get; set; }
+        public List<Schedule> Schedules { get; set; }
 
     }
 }

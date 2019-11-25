@@ -10,12 +10,15 @@ namespace Session3.Models
     {
         public int ID { get; set; }
         public int RoleID { get; set; }
+        public Role Role { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int OfficeID { get; set; }
+        public Office Office { get; set; }
         public DateTime Birthdate { get; set; }
         public bool Active { get; set; }
+        public List<Ticket> Tickets { get; set; }
     }
 }

@@ -10,8 +10,14 @@ namespace Session3.Models
     {
         public int ID { get; set; }
         public int UserID { get; set; }
+        public User User { get; set; }
+
         public int ScheduleID { get; set; }
+        public Schedule Schedule { get; set; }
+
         public int CabinTypeID { get; set; }
+        public CabinType CabinType { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
