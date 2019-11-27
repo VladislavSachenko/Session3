@@ -14,5 +14,7 @@ namespace Session3.Models
         public Country Country { get; set; }
         public string IATACode { get; set; }
         public string Name { get; set; }
+        public List<Route> ArrivalRoutes { get; set; }
+        public List<Route> DepatureRoutes { get; set; }
     }
 }

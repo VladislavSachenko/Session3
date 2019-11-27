@@ -162,6 +162,7 @@
     <Compile Include="Models\Office.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Route.cs" />
+    <Compile Include="Models\RoutesViewModel.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\User.cs" />

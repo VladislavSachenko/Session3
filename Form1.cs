@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
 using Session3.Models;
 
 namespace Session3
@@ -16,10 +17,39 @@ namespace Session3
         public Form1()
         {
             InitializeComponent();
+            InitDataComp();
+            SubscribeAll();
+            LoadTable(null, null);
             EFTutor();
         }
 
+        private void InitDataComp()
+        {
+            fromCB.ValueMember = "ID";
+            fromCB.DisplayMember = "IATACode";
+            toCB.ValueMember = "ID";
+            toCB.DisplayMember = "IATACode";
+            cabinTypeCB.ValueMember = "ID";
+            cabinTypeCB.DisplayMember = "Name";
+        }
+
+        private void SubscribeAll()
+        {
+            db.OnSave += LoadTable;
+        }
+
         FlyContext db = new Models.FlyContext();
+
+        private void LoadTable(object obj, EventArgs args)
+        {
+            var airoports = db.Airports.ToList();
+            fromCB.DataSource = airoports;
+            toCB.DataSource = airoports;
+            cabinTypeCB.DataSource = db.Airports.ToList();
+            dataGridView1.DataSource = db.Routes.Select(u => new { u.ID, u. }).ToList();
+        }
+        private List<>
+
 
         private void EFTutor()
         {
