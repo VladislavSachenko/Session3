@@ -276,6 +276,7 @@
             this.apply.TabIndex = 12;
             this.apply.Text = "Apply";
             this.apply.UseVisualStyleBackColor = true;
+            this.apply.Click += new System.EventHandler(this.apply_Click);
             // 
             // label6
             // 

@@ -26,7 +26,9 @@ namespace Session3.Models
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Session3.mdf;Integrated Security=True");
+            //optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Session3.mdf;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;Database=Session3;Integrated Security=True");
+
         }
         protected override void OnModelCreating(ModelBuilder b)
         {
@@ -43,6 +45,7 @@ namespace Session3.Models
             b.Entity<Route>().Property(u => u.FlightTime).HasColumnName("FlightTime");
             b.Entity<Route>().Property(u => u.ID).HasColumnName("ID");
             b.Entity<Route>().Property(u => u.Distance).HasColumnName("Distance");
+
 
         }
     }

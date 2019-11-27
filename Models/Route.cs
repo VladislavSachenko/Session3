@@ -16,5 +16,7 @@ namespace Session3.Models
 
         public int Distance { get; set; }
         public int FlightTime { get; set; }
+
+        public List<Schedule> Schedules { get; set; }
     }
 }

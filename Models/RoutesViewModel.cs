@@ -17,13 +17,16 @@ namespace Session3.Models
         public decimal CabinPrice { get; set; }
         public int NumbersOfStops { get; set; }
         public Route _Route { get; set; }
-        public RoutesViewModel(Route r)
+        public RoutesViewModel(Route r, DateTime date)
         {
             _Route = r;
             ID = r.ID;
             From = r.ArrivalAirport.Name;
             To = r.DepartureAirport.Name;
-            
+
+            //Schedule sch = r.Schedules.FirstOrDefault(date)
+            Date = r.Schedules.FirstOrDefault().Date;
+            Time = r.Schedules.FirstOrDefault().Time;        
         }
     }
 }

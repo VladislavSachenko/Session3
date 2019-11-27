@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Session3.Models;
+using System;
+using System.Data;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Session3
 {
@@ -40,15 +35,41 @@ namespace Session3
 
         FlyContext db = new Models.FlyContext();
 
-        private void LoadTable(object obj, EventArgs args)
+        private void RefreshGrid()
         {
-            var airoports = db.Airports.ToList();
-            fromCB.DataSource = airoports;
-            toCB.DataSource = airoports;
-            cabinTypeCB.DataSource = db.Airports.ToList();
-            dataGridView1.DataSource = db.Routes.Select(u => new { u.ID, u. }).ToList();
+            var resourseOutbound = db.Tickets
+                .Include(u => u.Schedule)
+                .ThenInclude(u => u.Route)
+                .Where(u =>
+                u.Schedule.Route.ArrivalAirportID == (int)fromCB.SelectedValue &&
+                u.Schedule.Route.DepartureAirportID == (int)toCB.SelectedValue &&
+                u.CabinTypeID == (int)cabinTypeCB.SelectedValue &&
+                DateTime.Parse(outBoundDate.Text ?? DateTime.Now.ToString()) == u.Schedule.Date)
+                .ToList();
+            if (returnRB.Checked)
+            {
+                var resourseReturn = db.Tickets
+                    .Include(u => u.Schedule)
+                    .ThenInclude(u => u.Route)
+                    .Where(u =>
+                    u.Schedule.Route.ArrivalAirportID == (int)toCB.SelectedValue &&
+                    u.Schedule.Route.DepartureAirportID == (int)fromCB.SelectedValue &&
+                    u.CabinTypeID == (int)cabinTypeCB.SelectedValue &&
+                    DateTime.Parse(returnDate.Text ?? DateTime.Now.ToString()) == u.Schedule.Date)
+                    .ToList();
+                dataGridView2.DataSource = resourseReturn;
+            }
+            dataGridView1.DataSource = resourseOutbound;
+            
         }
-        private List<>
+
+        private void LoadTable(object obj, EventArgs args)
+        { 
+            fromCB.DataSource = db.Airports.ToList(); ;
+            toCB.DataSource = db.Airports.ToList();
+            cabinTypeCB.DataSource = db.CabinTypes.ToList();
+            RefreshGrid();
+        }
 
 
         private void EFTutor()
@@ -82,6 +103,11 @@ namespace Session3
         private void Button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void apply_Click(object sender, EventArgs e)
+        {
+            LoadTable(sender, e);
         }
     }
 }
